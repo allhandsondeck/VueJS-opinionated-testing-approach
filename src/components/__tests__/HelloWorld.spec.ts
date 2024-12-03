@@ -1,11 +1,44 @@
-import { describe, it, expect } from 'vitest'
-
+import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import HelloWorld from '../HelloWorld.vue'
 
+vi.mock('../useHelloWorldGreeting', () => ({
+  useHelloWorldGreeting: () => ({
+    getTimeBasedGreeting: vi.fn().mockReturnValue('Good morning'),
+  }),
+}))
+
 describe('HelloWorld', () => {
-  it('renders properly', () => {
-    const wrapper = mount(HelloWorld, { props: { msg: 'Hello Vitest' } })
-    expect(wrapper.text()).toContain('Hello Vitest')
+  it('renders proper greeting with provided message', () => {
+    const wrapper = mount(HelloWorld, {
+      props: {
+        msg: 'World',
+      },
+    })
+
+    expect(wrapper.text()).toContain('Good morning, World')
+  })
+
+  it('contains links to Vite and Vue', () => {
+    const wrapper = mount(HelloWorld, {
+      props: {
+        msg: 'World',
+      },
+    })
+
+    const links = wrapper.findAll('a')
+    expect(links[0].attributes('href')).toBe('https://vite.dev/')
+    expect(links[1].attributes('href')).toBe('https://vuejs.org/')
+  })
+
+  it('applies correct CSS classes', () => {
+    const wrapper = mount(HelloWorld, {
+      props: {
+        msg: 'World',
+      },
+    })
+
+    expect(wrapper.find('h1').classes()).toContain('green')
+    expect(wrapper.find('.greetings')).toBeTruthy()
   })
 })
