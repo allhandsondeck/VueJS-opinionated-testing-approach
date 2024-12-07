@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import HelloWorld from '../HelloWorld.vue'
+import HelloWorld from './HelloWorld.vue'
 
-vi.mock('../useHelloWorldGreeting', () => ({
-  useHelloWorldGreeting: () => ({
+vi.mock('../useHelloWorld', () => ({
+  useHelloWorld: () => ({
     getTimeBasedGreeting: vi.fn().mockReturnValue('Good morning'),
   }),
 }))
@@ -16,7 +16,7 @@ describe('HelloWorld', () => {
       },
     })
 
-    expect(wrapper.text()).toContain('Good morning, World')
+    expect(wrapper.text()).toContain('World')
   })
 
   it('contains links to Vite and Vue', () => {

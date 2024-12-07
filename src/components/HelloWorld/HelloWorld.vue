@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { useHelloWorldGreeting } from './useHelloWorldGreeting';
+import { useHelloWorld } from './useHelloWorld'
 
 defineProps<{
   msg: string
 }>()
 
-const { getTimeBasedGreeting } = useHelloWorldGreeting();
-const currentGreeting = getTimeBasedGreeting(new Date().getHours())
+const { getTimeBasedGreeting } = useHelloWorld()
+const currentHour = new Date().getHours()
+const currentGreeting = getTimeBasedGreeting(currentHour)
 </script>
 
 <template>

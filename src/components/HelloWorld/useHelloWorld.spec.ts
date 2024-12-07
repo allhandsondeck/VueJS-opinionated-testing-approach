@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { useHelloWorldGreeting } from '../useHelloWorldGreeting'
+import { useHelloWorld } from './useHelloWorld'
 
-describe('useHelloWorldGreeting', () => {
-  const { getTimeBasedGreeting } = useHelloWorldGreeting()
+describe('useHelloWorld', () => {
+  const { getTimeBasedGreeting } = useHelloWorld()
 
   describe('getTimeBasedGreeting', () => {
     it('returns "Good morning" at the start of morning (5am)', () => {
